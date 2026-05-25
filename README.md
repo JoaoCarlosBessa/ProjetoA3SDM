@@ -23,8 +23,10 @@ python -m pip install -r requirements.txt
 ## Execução
 
 ```bash
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 ```
+
+Se o comando `uvicorn` não estiver disponível no seu terminal, use a forma acima com `python -m`, que executa o servidor pelo mesmo interpretador usado na instalação.
 
 A API persiste as tarefas em um arquivo SQLite local chamado `SDM_A3.db` na raiz do projeto.
 

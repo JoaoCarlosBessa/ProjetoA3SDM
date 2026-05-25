@@ -26,15 +26,11 @@ python -m pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-A API agora persiste as tarefas em um arquivo SQLite local chamado `SDM_A3.db` na raiz do projeto.
-
-Se você já tiver um arquivo de banco SQLite, coloque-o na raiz do projeto com esse nome exato para que a API o utilize.
-
-Se você quiser recriar o banco no sqliteonline.com, abra `sqliteonline-schema.sql` e execute a instrução `CREATE TABLE` lá.
+A API persiste as tarefas em um arquivo SQLite local chamado `SDM_A3.db` na raiz do projeto.
 
 Abra o frontend carregando `frontend/index.html` em um navegador ou servindo a pasta `frontend/` com qualquer servidor de arquivos estáticos.
 
-O frontend espera a API em `http://127.0.0.1:8000` por padrão. Você pode alterar a URL na página se a API estiver rodando em outro endereço.
+O frontend espera a API em `http://127.0.0.1:8000` por padrão.
 
 ## Endpoints
 

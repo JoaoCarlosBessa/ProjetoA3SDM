@@ -143,6 +143,12 @@ class TaskStore:
     def complete(self, task_id: str) -> Optional[Task]:
         return self.update(task_id, completed=True)
 
+    def delete(self, task_id: str) -> bool:
+        with self._lock, self._connect() as connection:
+            cursor = connection.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+            connection.commit()
+            return cursor.rowcount > 0
+
 
 def task_to_dict(task: Task) -> dict:
     return {

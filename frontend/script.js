@@ -56,6 +56,7 @@ function renderTask(task) {
   const editTitle = fragment.querySelector(".edit-title");
   const editDescription = fragment.querySelector(".edit-description");
   const completeButton = fragment.querySelector(".complete-button");
+  const deleteButton = fragment.querySelector(".delete-button");
 
   title.textContent = task.title;
   description.textContent = task.description || "Sem descrição informada.";
@@ -84,6 +85,18 @@ function renderTask(task) {
   completeButton.addEventListener("click", async () => {
     saveApiBaseUrl();
     await request(`/tasks/${task.id}/complete`, { method: "PATCH" });
+    await loadTasks();
+  });
+
+  deleteButton.addEventListener("click", async () => {
+    saveApiBaseUrl();
+
+    const shouldDelete = window.confirm(`Excluir a tarefa \"${task.title}\"?`);
+    if (!shouldDelete) {
+      return;
+    }
+
+    await request(`/tasks/${task.id}`, { method: "DELETE" });
     await loadTasks();
   });
 

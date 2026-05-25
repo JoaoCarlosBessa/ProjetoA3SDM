@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fluxo de Tarefas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Interface de gerenciamento de tarefas</p>
+          <h1>Fluxo de Tarefas</h1>
+          <p class="lede">
+            Crie, edite, conclua e acompanhe tarefas por meio do backend FastAPI.
+          </p>
+        </div>
+        <div class="api-card">
+          <label for="apiBaseUrl">URL base da API</label>
+          <input id="apiBaseUrl" type="text" value="http://127.0.0.1:8000" />
+          <button id="refreshTasks" type="button">Atualizar tarefas</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>Criar tarefa</h2>
+          <form id="createTaskForm">
+            <label>
+              Título
+              <input name="title" type="text" maxlength="200" required />
+            </label>
+            <label>
+              Descrição
+              <textarea name="description" rows="4" maxlength="2000"></textarea>
+            </label>
+            <button type="submit">Adicionar tarefa</button>
+          </form>
+        </article>
+
+        <article class="panel panel-wide">
+          <div class="panel-head">
+            <h2>Tarefas</h2>
+            <span id="statusText">Carregando...</span>
+          </div>
+          <div id="tasksList" class="tasks"></div>
+        </article>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <article class="task-card">
+        <div class="task-top">
+          <div>
+            <h3 class="task-title"></h3>
+            <p class="task-description"></p>
+          </div>
+          <span class="task-status"></span>
+        </div>
+
+        <form class="edit-form">
+          <label>
+            Título
+            <input class="edit-title" type="text" maxlength="200" required />
+          </label>
+          <label>
+            Descrição
+            <textarea class="edit-description" rows="3" maxlength="2000"></textarea>
+          </label>
+          <div class="task-actions">
+            <button type="submit">Salvar</button>
+            <button type="button" class="complete-button">Concluir</button>
+          </div>
+        </form>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

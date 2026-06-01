@@ -42,6 +42,7 @@ O frontend espera a API em `http://127.0.0.1:8000` por padrão.
 - `GET /tasks/{task_id}`
 - `PUT /tasks/{task_id}`
 - `PATCH /tasks/{task_id}/complete`
+- `DELETE /tasks/{task_id}`
 
 ## Frontend
 

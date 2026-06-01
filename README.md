@@ -9,6 +9,7 @@ API básica de gerenciamento de tarefas construída com FastAPI.
 - Visualizar uma tarefa
 - Editar tarefas
 - Marcar tarefas como concluídas
+- Deletar tarefas
 
 ## Requisitos
 

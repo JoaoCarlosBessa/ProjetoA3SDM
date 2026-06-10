@@ -35,6 +35,20 @@
               Descrição
               <textarea name="description" rows="4" maxlength="2000"></textarea>
             </label>
+            <div class="form-grid">
+              <label>
+                Data de entrega
+                <input name="due_date" type="date" />
+              </label>
+              <label>
+                Prioridade
+                <select name="priority">
+                  <option value="low">Baixa</option>
+                  <option value="medium" selected>Média</option>
+                  <option value="high">Alta</option>
+                </select>
+              </label>
+            </div>
             <button type="submit">Adicionar tarefa</button>
           </form>
         </article>
@@ -55,6 +69,7 @@
           <div>
             <h3 class="task-title"></h3>
             <p class="task-description"></p>
+            <div class="task-meta"></div>
           </div>
           <span class="task-status"></span>
         </div>
@@ -68,6 +83,20 @@
             Descrição
             <textarea class="edit-description" rows="3" maxlength="2000"></textarea>
           </label>
+          <div class="form-grid">
+            <label>
+              Data de entrega
+              <input class="edit-due-date" type="date" />
+            </label>
+            <label>
+              Prioridade
+              <select class="edit-priority">
+                <option value="low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+              </select>
+            </label>
+          </div>
           <div class="task-actions">
             <button type="submit">Salvar</button>
             <button type="button" class="complete-button">Concluir</button>

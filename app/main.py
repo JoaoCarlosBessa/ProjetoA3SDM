@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from .schemas import TaskCreate, TaskRead, TaskUpdate
-from .store import TaskStore, task_to_dict
+from .store import TaskStore, _UNSET, task_to_dict
 
 
 app = FastAPI(
@@ -22,6 +22,15 @@ app.add_middleware(
 store = TaskStore()
 
 
+def _fields_set(payload: TaskUpdate) -> set[str]:
+    fields_set = getattr(payload, "model_fields_set", None)
+    if fields_set is not None:
+        return set(fields_set)
+
+    legacy_fields_set = getattr(payload, "__fields_set__", None)
+    return set(legacy_fields_set or set())
+
+
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
@@ -34,7 +43,7 @@ def list_tasks() -> list[dict]:
 
 @app.post("/tasks", response_model=TaskRead, status_code=status.HTTP_201_CREATED)
 def create_task(payload: TaskCreate) -> dict:
-    task = store.create(payload.title, payload.description)
+    task = store.create(payload.title, payload.description, payload.due_date, payload.priority)
     return task_to_dict(task)
 
 
@@ -48,10 +57,13 @@ def get_task(task_id: str) -> dict:
 
 @app.put("/tasks/{task_id}", response_model=TaskRead)
 def edit_task(task_id: str, payload: TaskUpdate) -> dict:
+    fields_set = _fields_set(payload)
     task = store.update(
         task_id,
         title=payload.title,
         description=payload.description,
+        due_date=payload.due_date if "due_date" in fields_set else _UNSET,
+        priority=payload.priority if "priority" in fields_set else _UNSET,
         completed=payload.completed,
     )
     if task is None:
